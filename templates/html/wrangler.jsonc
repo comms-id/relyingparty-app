@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "relyingparty-app-html",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-15",
+  "compatibility_flags": ["webcrypto_modern_algorithms"],
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/auth/*", "/api/*", "/oidc/*", "/health"]
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "SESSIONS", "class_name": "SessionRecords" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SessionRecords"] }],
+  "vars": {
+    "COMMS_ID_ISSUER": "https://exchange.comms.id",
+    "COMMS_ID_CLIENT_ID": "",
+    "COMMS_ID_REDIRECT_URI": "https://html.relyingparty.app/auth/callback",
+    "COMMS_ID_SIGN_IN_CLASS": "person"
+  }
+}

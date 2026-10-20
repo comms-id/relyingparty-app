@@ -1,0 +1,24 @@
+packages:
+  - site
+  - templates/*
+
+# As platform: every version is pinned exactly to fleet.json or to a version a template names,
+# and @comms-id/sign-in is installed the day it is published.
+minimumReleaseAge: 0
+
+# @comms-id packages are on npmjs; a user npm config may map the scope to GitHub Packages, where they are not.
+registries:
+  '@comms-id': https://registry.npmjs.org/
+
+overrides:
+  # As www: @effect/platform-node 4.0.4 would take platform-node-shared 4.0.5, which needs a newer effect
+  # than the fleet's 4.0.4 (effect/Path has no make), and alchemy/Cloudflare then fails to load.
+  '@effect/platform-node-shared': 4.0.4
+  # Alchemy's Durable Object and D1 SQL layers: 4.0.5 wants effect 4.0.5 too.
+  '@effect/sql-d1': 4.0.4
+  '@effect/sql-sqlite-do': 4.0.4
+
+allowBuilds:
+  esbuild: true
+  sharp: false
+  workerd: true

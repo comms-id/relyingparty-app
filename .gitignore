@@ -1,1 +1,12 @@
 node_modules/
+dist/
+.wrangler/
+.open-next/
+.next/
+.alchemy/
+.dev.vars*
+.env*
+# pnpm writes its store here when the sandbox keeps it inside the worktree.
+.pnpm-store/
+# Next.js writes it on every build and dev run.
+next-env.d.ts

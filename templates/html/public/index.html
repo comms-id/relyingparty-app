@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in with Comms.ID: plain HTML template</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <!-- The button: pinned to one version with its integrity hash. It is a link to /auth/sign-in. -->
+    <script src="https://cdn.comms.id/sign-in/0.1.0.js" integrity="sha384-iW5Qy3Sk9knevKfZ096/47gZ4cToKBhajZsLa3tk+KbCGQQNLVwxIQ/uuolafBcl" crossorigin="anonymous"></script>
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow"><a href="https://relyingparty.app">relyingparty.app</a> · plain HTML template</p>
+      <h1>Sign in with Comms.ID</h1>
+      <p>A static page and a small Worker. The page shows the <code>&lt;comms-id-sign-in&gt;</code> element; the Worker runs the sign-in at IdX and keeps the session on the server.</p>
+
+      <section id="signed-out" hidden>
+        <comms-id-sign-in start="/auth/sign-in" sign-in-class="person" return-to="/"></comms-id-sign-in>
+      </section>
+
+      <section id="signed-in" hidden>
+        <h2>You are signed in</h2>
+        <dl>
+          <dt>Your id in this app</dt>
+          <dd><code id="sub"></code></dd>
+          <dt id="team-label" hidden>Team</dt>
+          <dd id="team" hidden></dd>
+          <dt>Session renews before</dt>
+          <dd id="expires"></dd>
+        </dl>
+        <p class="note">The id is pairwise: another app sees a different id for you.</p>
+        <form method="post" action="/auth/sign-out">
+          <button type="submit">Sign out</button>
+        </form>
+      </section>
+
+      <footer>
+        <p><a href="https://comms.id/docs/reference/sign-in">Sign in with Comms.ID docs</a> · <a href="https://relyingparty.app">Copy this template</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

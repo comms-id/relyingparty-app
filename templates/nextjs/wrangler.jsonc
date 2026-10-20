@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "relyingparty-app-nextjs",
+  "main": "worker.ts",
+  "compatibility_date": "2026-10-15",
+  // nodejs_compat and global_fetch_strictly_public: OpenNext's defaults (@opennextjs/cloudflare/templates/wrangler.jsonc).
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public", "webcrypto_modern_algorithms"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "SESSIONS", "class_name": "SessionRecords" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SessionRecords"] }],
+  "vars": {
+    "COMMS_ID_ISSUER": "https://exchange.comms.id",
+    "COMMS_ID_CLIENT_ID": "",
+    "COMMS_ID_REDIRECT_URI": "https://nextjs.relyingparty.app/auth/callback",
+    "COMMS_ID_SIGN_IN_CLASS": "person"
+  }
+}

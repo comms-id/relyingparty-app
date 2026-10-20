@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>relyingparty.app: Sign in with Comms.ID templates</title>
+    <meta name="description" content="Copy a template that already signs people in with Comms.ID: plain HTML, React or Next.js on Cloudflare Workers." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">relyingparty.app</p>
+        <h1>Sign in with Comms.ID, ready to copy</h1>
+        <p class="lead">
+          Each template below is a small app that already signs people in with Comms.ID. Open it, sign in, then copy it
+          and make it yours. Each one runs live here, on its own host, with its own registration.
+        </p>
+        <p><a class="docs" href="https://comms.id/docs/reference/sign-in">Read the Sign in with Comms.ID docs</a></p>
+      </header>
+
+      <section aria-labelledby="templates">
+        <h2 id="templates">Templates</h2>
+        <ul class="templates">
+          <li>
+            <h3><a href="https://html.relyingparty.app">Plain HTML</a></h3>
+            <p>A static page with the <code>&lt;comms-id-sign-in&gt;</code> element from cdn.comms.id, and a small Worker that runs the sign-in. No build step for the page.</p>
+            <pre><code>npx degit comms-id/relyingparty-app/templates/html my-app</code></pre>
+          </li>
+          <li>
+            <h3><a href="https://react.relyingparty.app">React</a></h3>
+            <p>A Vite React app with <code>SignInButton</code> from <code>@comms-id/sign-in-react</code>, served by the same kind of Worker.</p>
+            <pre><code>npx degit comms-id/relyingparty-app/templates/react my-app</code></pre>
+          </li>
+          <li>
+            <h3><a href="https://nextjs.relyingparty.app">Next.js</a></h3>
+            <p>Next.js on Cloudflare Workers: route handlers run the sign-in, and the page reads the session on the server.</p>
+            <pre><code>npx degit comms-id/relyingparty-app/templates/nextjs my-app</code></pre>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="make-it-yours">
+        <h2 id="make-it-yours">Make it yours</h2>
+        <ol>
+          <li>Copy a template and install it: <code>pnpm install</code>.</li>
+          <li>In <code>wrangler.jsonc</code>, set the Worker name and <code>COMMS_ID_REDIRECT_URI</code> to <code>https://&lt;your host&gt;/auth/callback</code>.</li>
+          <li>Deploy it once: <code>pnpm run deploy</code>. The page and the sector document are live; sign-in answers that it is not set up yet.</li>
+          <li>Make the signing key: <code>npx comms-id key --worker &lt;your Worker&gt;</code>. It puts the private key in the Worker secret <code>COMMS_ID_PRIVATE_JWK</code> and prints the public key.</li>
+          <li>Register the app in Companion: the public key, the redirect URI, the sector document <code>https://&lt;your host&gt;/oidc/redirect_uris</code> and the sign-in class.</li>
+          <li>Set <code>COMMS_ID_CLIENT_ID</code> to the client id Companion gives you, and deploy again.</li>
+        </ol>
+        <p>Each template's <code>README.md</code> has the details. The app keeps the key on its server; the browser holds only a session cookie.</p>
+      </section>
+
+      <section aria-labelledby="what-they-keep">
+        <h2 id="what-they-keep">What these templates keep</h2>
+        <p>
+          The only store is one Durable Object for each session: your pairwise id for that template, your Team Membership
+          when you sign in for a Team, and the ID token. It is deleted about 70 minutes after you sign in: 10 minutes after
+          the ID token expires. No name is asked for (scope <code>openid</code>), and nothing else is kept.
+        </p>
+        <p>
+          The templates are our own test bed: they sign in against production Comms.ID, and nothing depends on them.
+          Each template is its own app, so each one sees a different id for you.
+        </p>
+      </section>
+
+      <footer>
+        <p>By <a href="https://comms.id">Comms.ID</a>.</p>
+      </footer>
+    </main>
+  </body>
+</html>
