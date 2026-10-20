@@ -1,0 +1,14 @@
+{
+  "toolchain": {
+    "node": "24.21.0",
+    "pnpm": "12.11.2"
+  },
+  "install": {
+    "command": "CI=true pnpm install --frozen-lockfile",
+    "cacheInputs": ["package.json", "pnpm-lock.yaml"]
+  },
+  "verify": "pnpm verify",
+  "drq": "not adopted: deploys nothing yet and holds no personal information",
+  "pq": "not adopted: deploys nothing yet, and holds no secrets or personal information",
+  "github": "comms-id/relyingparty-app"
+}

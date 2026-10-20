@@ -1,0 +1,9 @@
+{
+  "name": "relyingparty-app",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "scripts": {
+    "verify": "node --test"
+  }
+}
