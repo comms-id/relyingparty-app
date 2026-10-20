@@ -6,6 +6,11 @@ packages:
 # and @comms-id/sign-in is installed the day it is published.
 minimumReleaseAge: 0
 
+overrides:
+  # As www: @effect/platform-node 4.0.4 would take platform-node-shared 4.0.5, which needs a newer effect
+  # than the fleet's 4.0.4 (effect/Path has no make), and alchemy/Cloudflare then fails to load.
+  '@effect/platform-node-shared': 4.0.4
+
 allowBuilds:
   esbuild: true
   sharp: false
