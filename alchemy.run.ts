@@ -28,7 +28,11 @@ import { Effect } from "effect";
 const ZONE_ID = "3005287717b3c87135940af69cd54bbb"; // relyingparty.app
 
 /** The client id Companion gave each template at its registration: public values, set after registration. */
-export const CLIENT_IDS: Readonly<Record<string, string>> = {};
+export const CLIENT_IDS: Readonly<Record<string, string>> = {
+  Html: "wehudbtv6sdii4qzhxc6owtib7nh48h0",
+  React: "p0tvzwo1jj3ksrvjdg3tmfdp9o0iyzra",
+  Nextjs: "n2bn90eijyoryyffposuwzt1ivgbwd47",
+};
 
 /** The commit /health names, which ship's production check expects. */
 const COMMIT_SHA = process.env.COMMIT_SHA?.trim() || execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
