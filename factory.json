@@ -5,10 +5,17 @@
   },
   "install": {
     "command": "CI=true pnpm install --frozen-lockfile",
-    "cacheInputs": ["package.json", "pnpm-lock.yaml"]
+    "cacheInputs": ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml"]
   },
   "verify": "pnpm verify",
-  "drq": "not adopted: deploys nothing yet and holds no personal information",
-  "pq": "not adopted: deploys nothing yet, and holds no secrets or personal information",
+  "ship": "CI=true pnpm run deploy",
+  "shipSecrets": ["CLOUDFLARE_DEPLOY_TOKEN"],
+  "worker": "relyingparty-app-site",
+  "prodVerify": {
+    "url": "https://relyingparty.app/health",
+    "expect": "commit {sha}"
+  },
+  "drq": "not adopted: the only store is one Durable Object per session (pairwise sub, Team Membership, ID token), deleted 10 minutes after the ID token expires; no name is asked (scope openid) and nothing else is kept",
+  "pq": "partial: visitors and the IdX redirects use Cloudflare's TLS on relyingparty.app, which has no ML-KEM gate (Free plan; comms.id's gate is platform-t86x); ID tokens and client assertions are ML-DSA-87 only",
   "github": "comms-id/relyingparty-app"
 }

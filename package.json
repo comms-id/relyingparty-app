@@ -3,7 +3,20 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": "24.21.0",
+    "pnpm": "12.11.2"
+  },
   "scripts": {
-    "verify": "node --test"
+    "verify": "node --test \"test/*.test.mjs\" && tsc && pnpm --recursive --workspace-concurrency=1 run verify",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:plan": "alchemy plan --stage production"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "4.0.4",
+    "@types/node": "24.19.2",
+    "alchemy": "2.0.0-beta.83",
+    "effect": "4.0.4",
+    "typescript": "7.0.2"
   }
 }
