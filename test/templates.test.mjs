@@ -37,8 +37,9 @@ test('every dependency is an exact registry version, so a copied template instal
 test('no local package override is tracked: no pnpmfile, and no local path in the lockfile', () => {
 	assert.ok(!tracked.some((path) => path.endsWith('.pnpmfile.cjs')), '.pnpmfile.cjs is tracked: it rewrites what pnpm installs')
 	const lockfile = text('pnpm-lock.yaml')
-	for (const local of ['file:', 'link:', '.agent-scope-tmp']) {
-		assert.ok(!lockfile.includes(local), `pnpm-lock.yaml names "${local}": install from the registry only`)
+	// A spec, not a package name that ends in "file" (proper-lockfile, get-caller-file).
+	for (const local of [/(^|[\s'"@])(file|link):/m, /\.agent-scope-tmp/]) {
+		assert.ok(!local.test(lockfile), `pnpm-lock.yaml matches ${local}: install from the registry only`)
 	}
 })
 

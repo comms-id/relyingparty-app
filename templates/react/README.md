@@ -12,6 +12,8 @@ cd my-app
 pnpm install
 ```
 
+If your npm config maps `@comms-id` to another registry, add `registries: { '@comms-id': https://registry.npmjs.org/ }` to your `pnpm-workspace.yaml`: the packages are on npmjs.
+
 ## Settings
 
 | Setting | Where | Value |
