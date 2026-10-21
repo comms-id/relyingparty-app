@@ -11,7 +11,7 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "typecheck": "tsc -p tsconfig.worker.json",
     "test": "vitest run",
-    "verify": "pnpm typecheck && pnpm test && pnpm build:worker"
+    "verify": "tsc -p tsconfig.worker.json && vitest run && opennextjs-cloudflare build && wrangler deploy --dry-run --outdir dist"
   },
   "dependencies": {
     "@comms-id/sign-in": "0.1.0",

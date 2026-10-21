@@ -14,6 +14,8 @@ pnpm install
 
 If your npm config maps `@comms-id` to another registry, add `registries: { '@comms-id': https://registry.npmjs.org/ }` to your `pnpm-workspace.yaml`: the packages are on npmjs.
 
+The template's `pnpm-workspace.yaml` approves the build scripts of `esbuild` and `workerd`. When a `@comms-id` version is only hours old, pnpm's minimum release age applies: pnpm records the version under `minimumReleaseAgeExclude` in `pnpm-workspace.yaml` itself, or, with `minimumReleaseAgeStrict: true`, stops with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`; then add the version it names to `minimumReleaseAgeExclude`.
+
 ## Settings
 
 | Setting | Where | Value |

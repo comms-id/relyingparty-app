@@ -9,7 +9,7 @@
     "deploy": "vite build && wrangler deploy",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json",
     "test": "vitest run",
-    "verify": "pnpm typecheck && pnpm test && pnpm build"
+    "verify": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json && vitest run && vite build && wrangler deploy --dry-run --outdir dist/worker"
   },
   "dependencies": {
     "@comms-id/sign-in": "0.1.0",
