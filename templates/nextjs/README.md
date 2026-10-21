@@ -14,6 +14,8 @@ pnpm install
 
 If your npm config maps `@comms-id` to another registry, add `registries: { '@comms-id': https://registry.npmjs.org/ }` to your `pnpm-workspace.yaml`: the packages are on npmjs.
 
+The template's `pnpm-workspace.yaml` approves the build scripts of `esbuild` and `workerd`. When a `@comms-id` version is only hours old, pnpm's minimum release age applies: pnpm records the version under `minimumReleaseAgeExclude` in `pnpm-workspace.yaml` itself, or, with `minimumReleaseAgeStrict: true`, stops with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`; then add the version it names to `minimumReleaseAgeExclude`.
+
 ## Settings
 
 | Setting | Where | Value |
@@ -69,7 +71,7 @@ pnpm verify   # typecheck, tests, and the OpenNext Worker build
 
 The tests run in Node against the fake issuer of `@comms-id/sign-in` (no network): cookies, `return_to`, the class, the ID token checks of ADR-0068, replay, renewal, sign-out, and the route handlers. The ML-DSA-87 path in the Workers runtime is proven by a live sign-in on <https://nextjs.relyingparty.app>.
 
-`pnpm build` is `next build`: OpenNext runs it from `opennextjs-cloudflare build`, so it must not run OpenNext itself. `pnpm build:worker` builds the Worker.
+`pnpm build` is `next build`, and `open-next.config.ts` has OpenNext run `next build` directly (`buildCommand`), not through pnpm. `pnpm build:worker` builds the Worker.
 
 ## Known limits
 

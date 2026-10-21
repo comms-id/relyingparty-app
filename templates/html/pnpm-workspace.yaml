@@ -1,0 +1,7 @@
+# This template's own pnpm settings, so a copy of it installs on its own: pnpm reads build approvals only
+# from this file. It makes the template a workspace root for pnpm started inside it, so no script here runs
+# pnpm again. The same allowBuilds as the repo's pnpm-workspace.yaml (test/copy.test.mjs).
+allowBuilds:
+  esbuild: true
+  sharp: false
+  workerd: true
